@@ -1,0 +1,180 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+    <title>Starting with RoverAPI &#8212; Discover  documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/classic.css" />
+    
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Discover  documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Starting with RoverAPI</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="starting-with-roverapi">
+<h1>Starting with RoverAPI<a class="headerlink" href="#starting-with-roverapi" title="Permalink to this heading">¶</a></h1>
+<p><strong>Description:</strong> This is a guided example on how set up a development environment to use DiscoverCCRI’s RoverAPI</p>
+<p><strong>Tutorial Level:</strong> Beginner</p>
+<p><strong>Next Tutorial:</strong> <a class="reference internal" href="example0.html"><span class="std std-doc">First Script</span></a></p>
+<p><strong>Contents:</strong></p>
+<ol type="1">
+  <li><a href="#1">Prerequisites</a></li>
+  <li><a href="#2">Setup</a></li>
+  <ol type="1">
+    <li><a href="#2.1">Installation</a></li>
+    <li><a href="#2.2">Run</a></li>
+    <li><a href="#2.3">Use</a></li>
+    <li><a href="#2.4">Continuing On</a></li>
+  </ol>
+</ol>
+<p>&nbsp;</p><p>&nbsp;</p>
+<div id="1"></div>
+<section id="prerequisites">
+<h2>1. Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this heading">¶</a></h2>
+<p>This tutorial assumes that you are familiar with <a class="reference external" href="https://discoverccri.org">DiscoverCCRI’s project</a>. If not, you should familiarize yourself with
+DiscoverCCRI’s infrastructure and <a class="reference external" href="https://discover-dev.rc.nau.edu/">portal</a>. To correctly use the containerized development environment, you will
+need to have installed <a class="reference external" href="https://www.docker.com/">docker</a> on a Linux or MacOS device.</p>
+<p>&nbsp;</p><p>&nbsp;</p>
+<div id="2"></div>
+</section>
+<section id="setup">
+<h2>2. Setup<a class="headerlink" href="#setup" title="Permalink to this heading">¶</a></h2>
+<p>The DiscoverCCRI rover team has created a containerized development environment allowing for users to easily run and test scripts that utilize our
+rovers. The development environment contains: <a class="reference external" href="https://ros.org">ROS</a>, the software suite that make controlling the rovers possible;
+<a class="reference external" href="https://gazebosim.org/home">Gazebo</a>, a 3D robotics simulator; and all required dependencies to make DiscoverCCRI’s
+<a class="reference external" href="https://github.com/DiscoverCCRI/RoverAPI">RoverAPI</a> work. The development enviroment is deployed in a docker container, and uses noVNC
+to allow for easy access.</p>
+<p>&nbsp;</p><p>&nbsp;</p>
+<div id="2.1"></div>
+<section id="installation">
+<h3>2.1 Installation<a class="headerlink" href="#installation" title="Permalink to this heading">¶</a></h3>
+<p>To install the docker container, simply run:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">docker</span> <span class="n">pull</span> <span class="n">cjb873</span><span class="o">/</span><span class="n">sim_image</span>
+</pre></div>
+</div>
+<p>&nbsp;</p><p>&nbsp;</p>
+<div id="2.2"></div>
+</section>
+<section id="run">
+<h3>2.2 Run<a class="headerlink" href="#run" title="Permalink to this heading">¶</a></h3>
+<p>To run the container, use the command</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">docker</span> <span class="n">run</span> <span class="o">-</span><span class="n">p</span> <span class="mi">9000</span><span class="p">:</span><span class="mi">80</span> <span class="o">-</span><span class="n">it</span> <span class="o">--</span><span class="n">name</span> <span class="n">rover_development_container</span> <span class="n">cjb873</span><span class="o">/</span><span class="n">sim_image</span>
+</pre></div>
+</div>
+<p>Then open your browser and go to <code class="docutils literal notranslate"><span class="pre">localhost:9000</span></code>. You should see the desktop of your container.</p>
+<p>After running the container, you can use the following command to stop your container:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">docker</span> <span class="n">stop</span>
+</pre></div>
+</div>
+<p>After creating the container, you just have to use the following command to activate it:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">docker</span> <span class="n">start</span> <span class="n">rover_development_container</span>
+</pre></div>
+</div>
+<p>&nbsp;</p><p>&nbsp;</p>
+<div id="2.3"></div>
+</section>
+<section id="use">
+<h3>2.3 Use<a class="headerlink" href="#use" title="Permalink to this heading">¶</a></h3>
+<p>To use the simulator in the container, run the following command in the terminal:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">roslaunch</span> <span class="n">leo_gazebo</span> <span class="n">leo_gazebo</span>
+</pre></div>
+</div>
+<p>Within gazebo you can place all sorts of objects to create a scenario to test the capabilities of the rover. From here you can develop code just like you
+normally would in any other situation.</p>
+<p>&nbsp;</p><p>&nbsp;</p>
+<div id="2.4"></div>
+</section>
+<section id="continuing-on">
+<h3>2.4 Continuing On<a class="headerlink" href="#continuing-on" title="Permalink to this heading">¶</a></h3>
+<p>If you are going to be continuing on with the other tutorials, create a directory for all of your tutorial code using the command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mkdir</span> <span class="o">~/</span><span class="n">beginner_tutorials</span>
+</pre></div>
+</div>
+<p>&nbsp;</p>
+</section>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="../index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">Starting with RoverAPI</a><ul>
+<li><a class="reference internal" href="#prerequisites">1. Prerequisites</a></li>
+<li><a class="reference internal" href="#setup">2. Setup</a><ul>
+<li><a class="reference internal" href="#installation">2.1 Installation</a></li>
+<li><a class="reference internal" href="#run">2.2 Run</a></li>
+<li><a class="reference internal" href="#use">2.3 Use</a></li>
+<li><a class="reference internal" href="#continuing-on">2.4 Continuing On</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/examples/starting.md.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Discover  documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Starting with RoverAPI</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2023, the DiscoverCCRI team.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.2.1.
+    </div>
+  </body>
+</html>
