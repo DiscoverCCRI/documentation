@@ -1,0 +1,7 @@
+name: docs_env
+channels:
+  - conda-forge
+dependencies:
+  - sphinx
+  - numpydoc
+  - myst-parser
