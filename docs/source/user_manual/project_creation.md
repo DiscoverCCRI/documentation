@@ -60,7 +60,9 @@ Once you have selected which to update, you will be presented with two lists of 
 The left side lists all Discover users that can be added to your project, whereas the
 right side contains all Discover users that have already been added to your project.
 Double click on a user to move them to the other side, or single click and use the arrows
-in the middle of the two lists to move a member. Use the **save button** to save all changes.  
+in the middle of the two lists to move a member. Use the **save button** to save all changes.
+To make someone a project owner, they must be added as a project user *before* they can be added
+as a project owner.  
 
 ![Adding users](images/adding_users.png)
 
