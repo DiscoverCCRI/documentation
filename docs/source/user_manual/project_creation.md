@@ -54,13 +54,13 @@ To add new users and owners, navigate to the **Membership** tab of your project.
 ![Project Users](images/project_users.png)
 
 Click on the **Update Project Users** button to update the users, or the **Update Project Owners**
-button to update the users. 
+button to update the owners. 
 
 Once you have selected which to update, you will be presented with two lists of members.
 The left side lists all Discover users that can be added to your project, whereas the
 right side contains all Discover users that have already been added to your project.
 Double click on a user to move them to the other side, or single click and use the arrows
-in the middle of the two lists to move a member. Use the **save button** to save all changes.
+in the middle of the two lists to move a member. Use the **save button** to save all changes.  
 
 ![Adding users](images/adding_users.png)
 
