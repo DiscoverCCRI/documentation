@@ -48,8 +48,8 @@ experiment resource definitions, and a list of all your project's experiments.
 ### Managing Users
 For your project, you are able to add project owners and project users. Project users
 have the ability to create and manage experiments and experiment resource definitions.
-Project owners have the added capabilities of adding additional users to the project.
-To add new users and owners, navigate to the **Membership Tab** of your project.
+Project owners have the added capabilities of adding new users to the project.
+To add new users and owners, navigate to the **Membership** tab of your project.
 
 ![Project Users](images/project_users.png)
 
