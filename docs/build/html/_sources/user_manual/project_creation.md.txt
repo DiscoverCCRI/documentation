@@ -11,7 +11,7 @@ the purview of a single principal investigator.
 
 ## Project Creation and Management
 
-*This section is for principal investigators (PIs) only.*
+*This section is for principal investigators (PIs) and project owners only.*
 
 ### Project Requests
 To create a project, navigate to the **Request Project** option in the navigation bar.  
@@ -48,8 +48,8 @@ experiment resource definitions, and a list of all your project's experiments.
 ### Managing Users
 For your project, you are able to add project owners and project users. Project users
 have the ability to create and manage experiments and experiment resource definitions.
-Project owners have the added capabilities of adding additional users to the project.
-To add new users and owners, navigate to the **Membership Tab** of your project.
+Project owners have the added capabilities of adding new users to the project.
+To add new users and owners, navigate to the **Membership** tab of your project.
 
 ![Project Users](images/project_users.png)
 
@@ -61,6 +61,7 @@ The left side lists all Discover users that can be added to your project, wherea
 right side contains all Discover users that have already been added to your project.
 Double click on a user to move them to the other side, or single click and use the arrows
 in the middle of the two lists to move a member. Use the **save button** to save all changes.
+
 ![Adding users](images/adding_users.png)
 
 ### Experiments
