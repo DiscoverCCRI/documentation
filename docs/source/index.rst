@@ -21,5 +21,6 @@ Contents
    :maxdepth: 1
 
    user_manual
+   nodes
    rover_examples 
    
