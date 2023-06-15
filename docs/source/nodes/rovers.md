@@ -28,7 +28,7 @@ Each rover has a 5-megapixel fisheye camera providing a 170-degree field of view
 
 Each rover can be equipped with the [RPLidar A2M8](https://www.slamtec.ai/home/rplidar_a2/),
 which is a 2D lidar. The lidar has a sampling frequency of up to 8 thousand 
-samples per second, at an angular resolution of 0.9 degrees, with a measuring 
+samples per second, at an angular resolution of 0.9 degrees, and a measuring 
 range of up to 12 meters.
 
 #### GPS
