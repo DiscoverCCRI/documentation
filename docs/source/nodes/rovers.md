@@ -33,4 +33,4 @@ range of up to 12 meters.
 
 #### GPS
 
-Each rover can be outfitted with an Emlid Reach GNSS RTK receiver module to provide precise positioning data.
+Each rover can be outfitted with an Emlid Reach M+ GNSS RTK receiver module to provide precise positioning data.
