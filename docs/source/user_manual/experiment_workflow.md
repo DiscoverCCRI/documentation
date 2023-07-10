@@ -13,7 +13,6 @@ This outline will reference four different actors that will work throughout the 
 > * Site-Server: The Site-Server is a server that is dedicated to a specific Discover site.
 
 ### 1. Experiment Creation:
-
 > * User: The user will create an experiment in the Discover Portal. They will provide a Resource Definition, GitHub link (based on our templates), cloud storage link,
 name, and description.
 > * Operator: None
@@ -38,7 +37,7 @@ Finally, it will use ssh to instruct the Site-Server to build the code into a Do
 
 ### 4. Experiment Run:
 > * User: None
-> * Operator: The operator will keep the mode at TESTBED, but change the state to ready. Then, they will run the experiment under the control module with `./control-module.py --exp <experiment_id>`.
+> * Operator: The operator will keep the mode at TESTBED, but change the state to ready. Then, they will run the experiment under the control module with `./control-module.py --exp <experiment_id>`. This control module will not only ensure the experiment runs properly, but will also get experimental results off of the container and clean up the Docker engine, along with putting the results back on the Site-Server.
 This should start up a docker container using the compose file, which will automatically pull the container image from the local repository on the Site-Server. Then, the experiment will run.
 > * Portal: None
 > * Site-Server: None
@@ -46,4 +45,5 @@ This should start up a docker container using the compose file, which will autom
 ### 5. Experiment Finished:
 > * User: None
 > * Operator: The operator will keep the mode at TESTBED, but change the state to submitted.
-> * Portal: The change in the state will signal to the portal that the experiment is finished. It will run an ssh command on the Site-Server, 
+> * Portal: The change in the state will signal to the portal that the experiment is finished. It will run a rsync pull to get the experiment's results back from the Site-Server, with `rysnc -avz <user>@<site-server>:/experiments/experiment_id> /experiments/<experiment_site>/<experiment_id>`. Then, the results will automatically be uploaded via the user's cloud storage link.
+> * Site-Server: The Site-Server will take actions as directed by the Portal.
