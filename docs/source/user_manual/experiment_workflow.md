@@ -25,7 +25,7 @@ The experiment mode and status will both be set to idle.
 > * Operator: None
 > * Portal: The Portal will set the mode to Development and the status to deploying. The portal will then run `cd /experiments/<experiment_site>/ && git clone <experiment_GitHub_link> && mv <experiment_repo_name> <experiment_id>`
 to properly clone the code. Then it will run `cp /<experiment_path_on_web_server>/config.yaml /experiments/<experiment_site>/<experiment_id>` to get the configuration file in the right place.
-Next, it will use rsync to copy over the experiment with `rsync /experiments/<experiment_site>/<experiment_id> <user>@<site-server>:/experiments/<experiment_id>`.
+Next, it will use rsync to copy over the experiment with `rsync -avz /experiments/<experiment_site>/<experiment_id> <user>@<site-server>:/experiments/<experiment_id>`.
 Finally, it will use ssh to instruct the Site-Server to build the code into a Docker container image with `ssh <user>@<site-server> ./package-builder.py --pkg <experiment_id>`.
 > * Site-Server: The Site-Server will receive the experimental code, build a Docker container image, generate a docker-compose file, and push the image to the local repository, as instructed by the Portal.
 
@@ -33,7 +33,7 @@ Finally, it will use ssh to instruct the Site-Server to build the code into a Do
 > * User: None
 > * Operator: After the Docker container image has been built, the operator will change the mode to TESTBED, while keeping the status at deploying.
 > * Portal: None
-> * Site-Server: The Site-Server will use rsync to move a generated docker-compose file to the correct piece of hardware with `rsync /experiments/<experiment_id> <user>@<end-node>:~/<experiment_id>`.
+> * Site-Server: The Site-Server will use rsync to move a generated docker-compose file to the correct piece of hardware with `rsync -avz /experiments/<experiment_id> <user>@<end-node>:~/<experiment_id>`.
 
 ### 4. Experiment Run:
 > * User: None
