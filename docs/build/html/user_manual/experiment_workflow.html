@@ -1,0 +1,173 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+    <title>Experiment Workflow &#8212; Discover  documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/classic.css" />
+    
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Discover  documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Experiment Workflow</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="experiment-workflow">
+<h1>Experiment Workflow<a class="headerlink" href="#experiment-workflow" title="Permalink to this heading">¶</a></h1>
+<p>This document will lay out all of the steps that will need to happen in order to run an experiment through the “experimental pipeline”.
+It will outline what both the user and operator will do, along with any actions that can be automated on devices.</p>
+<section id="actors">
+<h2>Actors:<a class="headerlink" href="#actors" title="Permalink to this heading">¶</a></h2>
+<p>This outline will reference four different actors that will work throughout the “experimental pipeline”.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>User: A user is an external person who will create projects and experiments using Discover’s software and hardware.</p></li>
+<li><p>Operator: An operator is a Discover-affiliated individual who will be responsible for ensuring that experiments are properly run on the hardware.</p></li>
+<li><p>Portal: In this instance, the Discover Portal is both the software used to manage experiments and the server the software is running on.</p></li>
+<li><p>Site-Server: The Site-Server is a server that is dedicated to a specific Discover site.</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="experiment-creation">
+<h2>1. Experiment Creation:<a class="headerlink" href="#experiment-creation" title="Permalink to this heading">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
+<li><p>User: The user will create an experiment in the Discover Portal. They will provide a Resource Definition, GitHub link (based on our templates), cloud storage link,
+name, and description.</p></li>
+<li><p>Operator: None</p></li>
+<li><p>Portal: The Portal will create a new directory pertaining to that individual experiment, giving it a unique experiment ID.
+The experiment mode and status will both be set to idle.</p></li>
+<li><p>Site-Server: None</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="initiate-development">
+<h2>2. Initiate Development:<a class="headerlink" href="#initiate-development" title="Permalink to this heading">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
+<li><p>User: When ready, the user will initiate development on their experiment. This signals to the Discover team that the experiment is ready to run on the hardware.</p></li>
+<li><p>Operator: None</p></li>
+<li><p>Portal: The Portal will set the mode to Development and the status to deploying. The portal will then run <code class="docutils literal notranslate"><span class="pre">cd</span> <span class="pre">/experiments/&lt;experiment_site&gt;/</span> <span class="pre">&amp;&amp;</span> <span class="pre">git</span> <span class="pre">clone</span> <span class="pre">&lt;experiment_GitHub_link&gt;</span> <span class="pre">&amp;&amp;</span> <span class="pre">mv</span> <span class="pre">&lt;experiment_repo_name&gt;</span> <span class="pre">&lt;experiment_id&gt;</span></code>
+to properly clone the code. Then it will run <code class="docutils literal notranslate"><span class="pre">cp</span> <span class="pre">/&lt;experiment_path_on_web_server&gt;/config.yaml</span> <span class="pre">/experiments/&lt;experiment_site&gt;/&lt;experiment_id&gt;</span></code> to get the configuration file in the right place.
+Next, it will use rsync to copy over the experiment with <code class="docutils literal notranslate"><span class="pre">rsync</span> <span class="pre">-avz</span> <span class="pre">/experiments/&lt;experiment_site&gt;/&lt;experiment_id&gt;</span> <span class="pre">&lt;user&gt;&#64;&lt;site-server&gt;:/experiments/&lt;experiment_id&gt;</span></code>.
+Finally, it will use ssh to instruct the Site-Server to build the code into a Docker container image with <code class="docutils literal notranslate"><span class="pre">ssh</span> <span class="pre">&lt;user&gt;&#64;&lt;site-server&gt;</span> <span class="pre">./package-builder.py</span> <span class="pre">--pkg</span> <span class="pre">&lt;experiment_id&gt;</span></code>.</p></li>
+<li><p>Site-Server: The Site-Server will receive the experimental code, build a Docker container image, generate a docker-compose file, and push the image to the local repository, as instructed by the Portal.</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="experiment-setup">
+<h2>3. Experiment Setup:<a class="headerlink" href="#experiment-setup" title="Permalink to this heading">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
+<li><p>User: None</p></li>
+<li><p>Operator: After the Docker container image has been built, the operator will change the mode to TESTBED, while keeping the status at deploying.</p></li>
+<li><p>Portal: None</p></li>
+<li><p>Site-Server: The Site-Server will use rsync to move a generated docker-compose file to the correct piece of hardware with <code class="docutils literal notranslate"><span class="pre">rsync</span> <span class="pre">-avz</span> <span class="pre">/experiments/&lt;experiment_id&gt;</span> <span class="pre">&lt;user&gt;&#64;&lt;end-node&gt;:~/&lt;experiment_id&gt;</span></code>.</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="experiment-run">
+<h2>4. Experiment Run:<a class="headerlink" href="#experiment-run" title="Permalink to this heading">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
+<li><p>User: None</p></li>
+<li><p>Operator: The operator will keep the mode at TESTBED, but change the state to ready. Then, they will run the experiment under the control module with <code class="docutils literal notranslate"><span class="pre">./control-module.py</span> <span class="pre">--exp</span> <span class="pre">&lt;experiment_id&gt;</span></code>. This control module will not only ensure the experiment runs properly, but will also get experimental results off of the container and clean up the Docker engine, along with putting the results back on the Site-Server.
+This should start up a docker container using the compose file, which will automatically pull the container image from the local repository on the Site-Server. Then, the experiment will run.</p></li>
+<li><p>Portal: None</p></li>
+<li><p>Site-Server: None</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="experiment-finished">
+<h2>5. Experiment Finished:<a class="headerlink" href="#experiment-finished" title="Permalink to this heading">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
+<li><p>User: None</p></li>
+<li><p>Operator: The operator will keep the mode at TESTBED, but change the state to submitted.</p></li>
+<li><p>Portal: The change in the state will signal to the portal that the experiment is finished. It will run a rsync pull to get the experiment’s results back from the Site-Server, with <code class="docutils literal notranslate"><span class="pre">rysnc</span> <span class="pre">-avz</span> <span class="pre">&lt;user&gt;&#64;&lt;site-server&gt;:/experiments/experiment_id&gt;</span> <span class="pre">/experiments/&lt;experiment_site&gt;/&lt;experiment_id&gt;</span></code>. Then, the results will automatically be uploaded via the user’s cloud storage link.</p></li>
+<li><p>Site-Server: The Site-Server will take actions as directed by the Portal.</p></li>
+</ul>
+</div></blockquote>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="../index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">Experiment Workflow</a><ul>
+<li><a class="reference internal" href="#actors">Actors:</a></li>
+<li><a class="reference internal" href="#experiment-creation">1. Experiment Creation:</a></li>
+<li><a class="reference internal" href="#initiate-development">2. Initiate Development:</a></li>
+<li><a class="reference internal" href="#experiment-setup">3. Experiment Setup:</a></li>
+<li><a class="reference internal" href="#experiment-run">4. Experiment Run:</a></li>
+<li><a class="reference internal" href="#experiment-finished">5. Experiment Finished:</a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/user_manual/experiment_workflow.md.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Discover  documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Experiment Workflow</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2023, the DiscoverCCRI team.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
+    </div>
+  </body>
+</html>
