@@ -45,8 +45,137 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <section id="discover-tracking-module">
-<h1>discover_tracking module<a class="headerlink" href="#discover-tracking-module" title="Permalink to this heading">¶</a></h1>
+  <section id="module-discover_tracking">
+<span id="discover-tracking-module"></span><h1>discover_tracking module<a class="headerlink" href="#module-discover_tracking" title="Permalink to this heading">¶</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="discover_tracking.Tracker">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">discover_tracking.</span></span><span class="sig-name descname"><span class="pre">Tracker</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">subscribe</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">callback</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#discover_tracking.Tracker" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p class="rubric">Methods</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#discover_tracking.Tracker.get_marker_distance" title="discover_tracking.Tracker.get_marker_distance"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_marker_distance</span></code></a>()</p></td>
+<td><p>A function that returns the distance that the marker is from the camera .</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#discover_tracking.Tracker.get_marker_id" title="discover_tracking.Tracker.get_marker_id"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_marker_id</span></code></a>()</p></td>
+<td><p>A function that returns the ID of the ARTag marker.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#discover_tracking.Tracker.get_marker_visible" title="discover_tracking.Tracker.get_marker_visible"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_marker_visible</span></code></a>()</p></td>
+<td><p>A function that returns the value of the marker_visible flag.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#discover_tracking.Tracker.subscribe_to_marker_topic" title="discover_tracking.Tracker.subscribe_to_marker_topic"><code class="xref py py-obj docutils literal notranslate"><span class="pre">subscribe_to_marker_topic</span></code></a>()</p></td>
+<td><p>Subscribes to ROS /visualization_marker topic published by the alavar tracking node.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py method">
+<dt class="sig sig-object py" id="discover_tracking.Tracker.get_marker_distance">
+<span class="sig-name descname"><span class="pre">get_marker_distance</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#discover_tracking.Tracker.get_marker_distance" title="Permalink to this definition">¶</a></dt>
+<dd><p>A function that returns the distance that the marker is from the camera
+. If no marker is visible, returns None.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>None</strong></dt><dd></dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>float</dt><dd><p>The distance that the ARTag marker is from the camera in meters.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">rover_api.discover_tracking</span> <span class="kn">import</span> <span class="n">Tracker</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tracker</span> <span class="o">=</span> <span class="n">Tracker</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">if</span> <span class="n">tracker</span><span class="o">.</span><span class="n">get_marker_visible</span><span class="p">():</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="nb">print</span><span class="p">(</span><span class="n">tracker</span><span class="o">.</span><span class="n">get_marker_distance</span><span class="p">())</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="discover_tracking.Tracker.get_marker_id">
+<span class="sig-name descname"><span class="pre">get_marker_id</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#discover_tracking.Tracker.get_marker_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>A function that returns the ID of the ARTag marker. If no marker is
+visible, returns None</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>None</strong></dt><dd></dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>int</dt><dd><p>The ID of the ARTag marker as a value between 0 and 17.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">rover_api.discover_tracking</span> <span class="kn">import</span> <span class="n">Tracker</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tracker</span> <span class="o">=</span> <span class="n">Tracker</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">if</span> <span class="n">tracker</span><span class="o">.</span><span class="n">get_marker_visible</span><span class="p">():</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="nb">print</span><span class="p">(</span><span class="n">tracker</span><span class="o">.</span><span class="n">get_marker_id</span><span class="p">())</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="discover_tracking.Tracker.get_marker_visible">
+<span class="sig-name descname"><span class="pre">get_marker_visible</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#discover_tracking.Tracker.get_marker_visible" title="Permalink to this definition">¶</a></dt>
+<dd><p>A function that returns the value of the marker_visible flag.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>None</strong></dt><dd></dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>bool</dt><dd><p>This boolean represents whether or not the rover’s camera has
+detected an ARTag marker.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">rover_api.discover_tracking</span> <span class="kn">import</span> <span class="n">Tracker</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tracker</span> <span class="o">=</span> <span class="n">Tracker</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">is_visible</span> <span class="o">=</span> <span class="n">tracker</span><span class="o">.</span><span class="n">get_marker_visible</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="discover_tracking.Tracker.subscribe_to_marker_topic">
+<span class="sig-name descname"><span class="pre">subscribe_to_marker_topic</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#discover_tracking.Tracker.subscribe_to_marker_topic" title="Permalink to this definition">¶</a></dt>
+<dd><p>Subscribes to ROS /visualization_marker topic published by the alavar
+tracking node. If subscribe is set to False, call this function to get
+data from the tracking node</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>None</strong></dt><dd></dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>None</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">rover_api.discover_tracking</span> <span class="kn">import</span> <span class="n">Tracker</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tracker</span> <span class="o">=</span> <span class="n">Tracker</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tracker</span><span class="o">.</span><span class="n">subscribe_to_marker_topic</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</dd></dl>
+
 </section>
 
 
@@ -56,6 +185,22 @@
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="../index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">discover_tracking module</a><ul>
+<li><a class="reference internal" href="#discover_tracking.Tracker"><code class="docutils literal notranslate"><span class="pre">Tracker</span></code></a><ul>
+<li><a class="reference internal" href="#discover_tracking.Tracker.get_marker_distance"><code class="docutils literal notranslate"><span class="pre">Tracker.get_marker_distance()</span></code></a></li>
+<li><a class="reference internal" href="#discover_tracking.Tracker.get_marker_id"><code class="docutils literal notranslate"><span class="pre">Tracker.get_marker_id()</span></code></a></li>
+<li><a class="reference internal" href="#discover_tracking.Tracker.get_marker_visible"><code class="docutils literal notranslate"><span class="pre">Tracker.get_marker_visible()</span></code></a></li>
+<li><a class="reference internal" href="#discover_tracking.Tracker.subscribe_to_marker_topic"><code class="docutils literal notranslate"><span class="pre">Tracker.subscribe_to_marker_topic()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  </div>
   <div>
     <h4>Previous topic</h4>
     <p class="topless"><a href="discover_utils.html"
