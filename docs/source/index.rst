@@ -23,4 +23,4 @@ Contents
    user_manual
    nodes
    rover_examples 
-   
+   rover_api
