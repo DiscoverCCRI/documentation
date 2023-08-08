@@ -16,7 +16,7 @@ import sys
 
 
 # -- Project information -----------------------------------------------------
-sys.path.insert(0, os.path.abspath('~/catkin_ws/src/rover_api/src/rover_api'))
+sys.path.insert(0, os.path.abspath('/home/cjb873/catkin_ws/src/rover_api/src/rover_api'))
 project = 'Discover'
 copyright = '2023, the DiscoverCCRI team'
 author = 'the DiscoverCCRI team'
