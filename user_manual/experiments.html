@@ -1,0 +1,185 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Experiments &#8212; Discover  documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/classic.css" />
+    
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Nodes" href="../nodes.html" />
+    <link rel="prev" title="Projects" href="project_creation.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../nodes.html" title="Nodes"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="project_creation.html" title="Projects"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Discover  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../user_manual.html" accesskey="U">User Manual</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Experiments</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="experiments">
+<h1>Experiments<a class="headerlink" href="#experiments" title="Permalink to this heading">¶</a></h1>
+<p>Experiments are where principal actions take place inside the Discover portal.
+Experiments contain all of the code necessary to take some action using Discover
+hardware. The primary experiment flow for Discover is shown below.</p>
+<p><img alt="Experiment Flow" src="../_images/experiment_flow.png" /></p>
+<p>Users create experiments based on our GitHub templates, and submit their code using
+the Discover portal. The portal notifies an administrator, who can accept or decline
+the experiment. Once an experiment has been accepted and scheduled, an operator
+is notified. The operator will manage the operation of the experiment on the
+hardware, as well as any actions that need to be taken in the portal. All portal actions
+will result in a email being sent to the experimenter. Additionally, the portal will
+contact the server at the experiment site, which will build all of the code
+for the experiment. The requested nodes will receive experimental code,
+in the form of a Docker container. Then, the operator can run the code, and submit
+results back to the user.</p>
+<div class="section" id="experiment-creation">
+<h2>Experiment Creation<a class="headerlink" href="#experiment-creation" title="Permalink to this heading">¶</a></h2>
+<p>To create an experiment, navigate to the <strong>Experiments</strong> tab within the project
+to which the experiment pertains. Click the <strong>Add Experiment</strong> button.</p>
+<p><img alt="Experiment List" src="../_images/add_experiment.png" /></p>
+<p>Next, you will be presented with the experiment creation screen. Here, you will
+name your experiment, provide the experiment description, along with the experiment
+resource definition.</p>
+<p>The description of your experiment can include any information you wish to include,
+but it <em>must</em> include a link to the templated GitHub repository containing your
+experiment’s code. For more information about experiment templates, click <a class="reference internal" href="#experiment_templates.md"><span class="xref myst">here</span></a>.</p>
+<p>The experiment resource definition states what devices and capabilities your experiment
+will use. For more information about resource definitions, click <a class="reference internal" href="#resource_definitions.md"><span class="xref myst">here</span></a></p>
+<p>Click <strong>Save Experiment</strong> to create the experiment.</p>
+<p><img alt="Experiment Creation" src="../_images/experiment_creation.png" /></p>
+</div>
+<div class="section" id="experiment-initiation">
+<h2>Experiment Initiation<a class="headerlink" href="#experiment-initiation" title="Permalink to this heading">¶</a></h2>
+<p>As you develop your experiment, you can add anyone from within your project as
+additional experimenters using the <strong>Update Experimenters</strong> button, change the
+description using the <strong>Change</strong> button, and get a list of experiment resources
+using the <strong>Manifest</strong> button. Once you are ready for your experiment to be deployed
+click the <strong>Initiate Development</strong> button. This signals to a Discover operator
+that your experiment is ready to be deployed, and will automatically notify them.</p>
+<p><img alt="Initiate Development" src="../_images/initiate_development.png" /></p>
+</div>
+<div class="section" id="final-steps">
+<h2>Final Steps<a class="headerlink" href="#final-steps" title="Permalink to this heading">¶</a></h2>
+<p>Once you have initiated development, you can still change your experiment description
+and the experimenters. Once the experiment mode changes to <strong>TESTBED</strong> these are
+locked in. Additionally, after you have initiated development, you should update
+the cloud storage link <em>immediately</em>. This link directs the operator to some cloud
+storage website such as Google Drive or Dropbox. The operator will deposit the results
+of your experiment in this location once it has been completed. Make sure that the operator
+has the proper permissions to upload files to the cloud storage site <em>by using the link</em>.</p>
+<p><img alt="Cloud Storage" src="../_images/cloud_storage.png" /></p>
+</div>
+<div class="section" id="additional-information">
+<h2>Additional Information<a class="headerlink" href="#additional-information" title="Permalink to this heading">¶</a></h2>
+<p>The <strong>Terminate</strong> button will not delete your experiment, it will only send it back
+to the <strong>Idle</strong> mode, which is the mode the experiment began in before you clicked
+on <strong>Initiate Development</strong>. Experiments should be terminated when changes to your
+code need to be made after you have clicked <strong>Initiate Development</strong>.</p>
+<p>You will receive emails whenever something happens with your experiment. Emails
+can be notifying you that your experiment has been deployed, that there is some
+sort of issue with your experiment, or that your experiment has finished. Emails
+will be sent to the address(es) associated with all experimenter(s).</p>
+</div>
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="../index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">Experiments</a><ul>
+<li><a class="reference internal" href="#experiment-creation">Experiment Creation</a></li>
+<li><a class="reference internal" href="#experiment-initiation">Experiment Initiation</a></li>
+<li><a class="reference internal" href="#final-steps">Final Steps</a></li>
+<li><a class="reference internal" href="#additional-information">Additional Information</a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="project_creation.html"
+                          title="previous chapter">Projects</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="../nodes.html"
+                          title="next chapter">Nodes</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/user_manual/experiments.md.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../nodes.html" title="Nodes"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="project_creation.html" title="Projects"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Discover  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../user_manual.html" >User Manual</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Experiments</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2023, the DiscoverCCRI team.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.0.2.
+    </div>
+  </body>
+</html>

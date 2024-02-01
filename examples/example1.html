@@ -1,0 +1,362 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Utilizing More Features &#8212; Discover  documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/classic.css" />
+    
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Rover API" href="../rover_api.html" />
+    <link rel="prev" title="Rover API First Script" href="example0.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../rover_api.html" title="Rover API"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="example0.html" title="Rover API First Script"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Discover  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../rover_examples.html" accesskey="U">Rover Examples</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Utilizing More Features</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="utilizing-more-features">
+<h1>Utilizing More Features<a class="headerlink" href="#utilizing-more-features" title="Permalink to this heading">¶</a></h1>
+<p><strong>Description:</strong> This is a guided example on how to write a more involved python script to use DiscoverCCRI’s RoverAPI</p>
+<p><strong>Tutorial Level:</strong> Beginner</p>
+<p><strong>Previous Tutorial:</strong> <a class="reference internal" href="example0.html"><span class="std std-doc">First Script</span></a></p>
+<p><strong>Contents:</strong></p>
+<ol type="1">
+  <li><a href="#1">Prerequisites</a></li>
+  <li><a href="#2">The Code</a></li>
+  <ol type="1">
+    <li><a href="#2.1">Writing the Code</a></li>
+    <li><a href="#2.2">Explanation</a></li>
+  </ol>
+</ol>
+<p>&nbsp;</p><p>&nbsp;</p>
+<div id="1"></div>
+<div class="section" id="prerequisites">
+<h2>1. Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this heading">¶</a></h2>
+<p>This tutorial expects you to have already completed the <a class="reference internal" href="example0.html"><span class="std std-doc">previous tutorial</span></a>. It also expects you to have some knowledge and comfortability with
+Python’s <a class="reference external" href="https://docs.python.org/3/reference/expressions.html#lambda">anonymous function</a> feature, along with knowledge of <a class="reference external" href="https://en.wikipedia.org/wiki/Callback_(computer_programming)">callback functions</a>.</p>
+<p>&nbsp;</p><p>&nbsp;</p>
+<div id="2"></div>
+</div>
+<div class="section" id="the-code">
+<h2>2. The Code<a class="headerlink" href="#the-code" title="Permalink to this heading">¶</a></h2>
+<p>This tutorial will build off of the <a class="reference internal" href="example0.html"><span class="std std-doc">previous</span></a> tutorial. You will utilize increased functionality within the API.</p>
+<p>&nbsp;</p><p>&nbsp;</p>
+<div id="2.1"></div>
+<div class="section" id="writing-the-code">
+<h3>2.1 Writing the Code<a class="headerlink" href="#writing-the-code" title="Permalink to this heading">¶</a></h3>
+<p>First, access your development environment, open the terminal and change into your beginner_tutorials directory:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="o">~/</span><span class="n">beginner_tutorials</span>
+</pre></div>
+</div>
+<p>&nbsp;</p>
+<p>Download the python code for this tutorial and make it an executable file:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">wget</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">raw</span><span class="o">.</span><span class="n">githubusercontent</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">DiscoverCCRI</span><span class="o">/</span><span class="n">RoverAPI</span><span class="o">/</span><span class="n">main</span><span class="o">/</span><span class="n">examples</span><span class="o">/</span><span class="n">more_features</span><span class="o">.</span><span class="n">py</span>
+<span class="n">chmod</span> <span class="o">+</span><span class="n">x</span> <span class="n">more_features</span><span class="o">.</span><span class="n">py</span>
+</pre></div>
+</div>
+<p>&nbsp;</p>
+<p>You can view and edit this code with <code class="docutils literal notranslate"><span class="pre">vim</span> <span class="pre">more_features.py</span></code> or view the code below:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/env python3</span>
+<span class="c1"># license removed for concision</span>
+
+<span class="kn">from</span> <span class="nn">rover_api.discover_rover</span> <span class="kn">import</span> <span class="n">Rover</span>
+<span class="kn">from</span> <span class="nn">rover_api.discover_camera</span> <span class="kn">import</span> <span class="n">Camera</span>
+<span class="kn">from</span> <span class="nn">rover_api.discover_lidar</span> <span class="kn">import</span> <span class="n">Lidar</span>
+<span class="kn">from</span> <span class="nn">rover_api.discover_init</span> <span class="kn">import</span> <span class="n">ExperimentInitializer</span>
+<span class="kn">from</span> <span class="nn">rover_api.discover_utils</span> <span class="kn">import</span> <span class="n">finish_experiment</span>
+<span class="kn">from</span> <span class="nn">rover_api.discover_utils</span> <span class="kn">import</span> <span class="n">get_time_str</span>
+
+<span class="k">def</span> <span class="nf">finished_cb</span><span class="p">(</span><span class="n">lidar</span><span class="p">,</span> <span class="n">num_images</span><span class="p">):</span>
+    
+    <span class="c1"># we call the lidar functions necessary to save the data within the </span>
+    <span class="c1"># finished function so that if, for some reason, the experiment is </span>
+    <span class="c1"># prematurely ended, the lidar still saves all of its data</span>
+    
+    <span class="c1"># stop the recording</span>
+    <span class="n">lidar</span><span class="o">.</span><span class="n">stop_recording</span><span class="p">()</span>
+    
+    <span class="c1"># write the time at the end of the experiment at the end of the file</span>
+    <span class="c1"># along with the total number of frames for our video</span>
+    <span class="c1"># we can use this information to determine the fps captured by</span>
+    <span class="c1"># our rover, which should be somewhere between 24 and 28 fps</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;/experiment/information.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">outfile</span><span class="p">:</span>
+        <span class="n">outfile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;{get_time_str()}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">outfile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Num of frames: </span><span class="si">{num_images[0]}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">take_video</span><span class="p">(</span><span class="n">cam</span><span class="p">,</span> <span class="n">num_images</span><span class="p">):</span>
+    
+    <span class="c1"># save the jpg of the image taken, update the number of images</span>
+    <span class="n">cam</span><span class="o">.</span><span class="n">get_jpg</span><span class="p">()</span>
+    <span class="n">num_images</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+
+
+<span class="c1"># initialize the objects to control the hardware</span>
+<span class="n">rover</span> <span class="o">=</span> <span class="n">Rover</span><span class="p">()</span>
+<span class="n">lidar</span> <span class="o">=</span> <span class="n">Lidar</span><span class="p">(</span><span class="n">callback</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">convert</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">subscribe</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">cam</span> <span class="o">=</span> <span class="n">Camera</span><span class="p">()</span>
+    
+<span class="c1"># declare number of images as a list so that the value can be passed back</span>
+<span class="c1"># after the anonymous function has been called</span>
+<span class="n">num_images</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    
+<span class="c1"># initialize the experiment with a function that will be called when it</span>
+<span class="c1"># is over</span>
+<span class="c1"># we must instiantiate an initializer object before we make any calls to</span>
+<span class="c1"># other objects</span>
+<span class="n">init</span> <span class="o">=</span> <span class="n">ExperimentInitializer</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="n">finished_cb</span><span class="p">(</span><span class="n">lidar</span><span class="p">,</span> <span class="n">num_images</span><span class="p">))</span>
+    
+<span class="c1"># set the callback - this means that everytime the rover&#39;s camera has a </span>
+<span class="c1"># new image, this function will be called</span>
+<span class="c1"># it is initialized as a lambda so values can be changed within the </span>
+<span class="c1"># function</span>
+<span class="n">cam</span><span class="o">.</span><span class="n">set_callback</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="n">take_video</span><span class="p">(</span><span class="n">cam</span><span class="p">,</span> <span class="n">num_images</span><span class="p">))</span>
+
+
+<span class="c1"># record the current time to a file</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;/experiment/information.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">outfile</span><span class="p">:</span>
+    <span class="n">outfile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;{get_time_str()}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># start a recording of the lidar data</span>
+<span class="n">lidar</span><span class="o">.</span><span class="n">subscribe_to_scan</span><span class="p">()</span>
+<span class="n">lidar</span><span class="o">.</span><span class="n">start_recording</span><span class="p">()</span>
+
+<span class="c1"># drive in a 1 meter square</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">):</span>
+    <span class="c1"># drive forward at a rate of 0.2 m/s for 5s</span>
+    <span class="n">rover</span><span class="o">.</span><span class="n">move_forward</span><span class="p">(</span><span class="mf">0.2</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+
+    <span class="c1"># turn right at a rate of 15 deg/s for 6s</span>
+    <span class="n">rover</span><span class="o">.</span><span class="n">turn_right</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span> 
+
+<span class="c1"># finish the experiment - this will automatically call our finished_cb func</span>
+<span class="n">finish_experiment</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>&nbsp;</p>
+<div id="2.2"></div>
+</div>
+<div class="section" id="explanation">
+<h3>2.2 Explanation<a class="headerlink" href="#explanation" title="Permalink to this heading">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/user/bin/env python3</span>
+</pre></div>
+</div>
+<p>Every script we write will contain this <a class="reference external" href="https://en.wikipedia.org/wiki/Shebang_(Unix)">shebang</a>, which lets the computer know which type of interpreter to
+use when running scripts as executables.</p>
+<p>&nbsp;</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">rover_api.discover_rover</span> <span class="kn">import</span> <span class="n">Rover</span>
+<span class="kn">from</span> <span class="nn">rover_api.discover_camera</span> <span class="kn">import</span> <span class="n">Camera</span>
+<span class="kn">from</span> <span class="nn">rover_api.discover_lidar</span> <span class="kn">import</span> <span class="n">Lidar</span>
+<span class="kn">from</span> <span class="nn">rover_api.discover_init</span> <span class="kn">import</span> <span class="n">ExperimentInitializer</span>
+<span class="kn">from</span> <span class="nn">rover_api.discover_utils</span> <span class="kn">import</span> <span class="n">finish_experiment</span>
+<span class="kn">from</span> <span class="nn">rover_api.discover_utils</span> <span class="kn">import</span> <span class="n">get_time_str</span>
+</pre></div>
+</div>
+<p>For this experiment, we will need to use the capabilities of the camera, lidar, and movement systems, as in the previous tutorial, along with the function signaling that our experiment has ended. Additionally we will need extra functionailty to set up your experiment, and get a formatted time string.</p>
+<p>&nbsp;</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">finished_cb</span><span class="p">(</span><span class="n">lidar</span><span class="p">,</span> <span class="n">num_images</span><span class="p">):</span>
+</pre></div>
+</div>
+<p>We will start by declaring a callback function that will be called when we signal to the system that we are finished with our experiment. We will pass the lidar object and the number of images captured during this experiment as arguments.</p>
+<p>&nbsp;</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>    <span class="c1"># stop the recording</span>
+    <span class="n">lidar</span><span class="o">.</span><span class="n">stop_recording</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Next, we will stop the recording. We will be calling the stop_recording function within our finished function because this is the final function that will be called before the program exits, and we want your lidar to be capturing information for the entire duration of the program. Additionally, if the rover has some sort of problem, such as the battery becoming very low, our callback function will be called before it powers off. By placing the stop_recording() function call within this function, we ensure that our lidar data is properly saved.</p>
+<p>&nbsp;</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>    <span class="c1"># write the time at the end of the experiment at the end of the file</span>
+    <span class="c1"># along with the total number of frames for our video</span>
+    <span class="c1"># we can use this information to determine the fps captured by</span>
+    <span class="c1"># our rover, which should be somewhere between 24 and 28 fps</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;/experiment/information.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">outfile</span><span class="p">:</span>
+        <span class="n">outfile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;{get_time_str()}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">outfile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Num of frames: </span><span class="si">{num_images[0]}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>After stopping the lidar, we will want to write the total number of images collected by the rover during the experiment to a file, along with the current time. With this information, we can determine the length of the experiment. So, if we wanted to turn the series of images captured during this experiment into a video, we can determine the number of frames captured per second.</p>
+<p>&nbsp;</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">take_video</span><span class="p">(</span><span class="n">cam</span><span class="p">,</span> <span class="n">num_images</span><span class="p">):</span>
+</pre></div>
+</div>
+<p>Now, we will define the camera’s callback function. This function will be called whenever the camera produces new image data. The camera object and the current number of images will be passed as arguments.</p>
+<p>&nbsp;</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>    <span class="c1"># save the jpg of the image taken, update the number of images</span>
+    <span class="n">cam</span><span class="o">.</span><span class="n">get_jpg</span><span class="p">()</span>
+    <span class="n">num_images</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+</pre></div>
+</div>
+<p>Within our camera callback function, we will save the jpg of the new image produced by the camera, and increment the total number of images. Notice that we will treat the number of images as an item within a list, as the reason for this will be explained later.</p>
+<p>&nbsp;</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># initialize the objects to control the hardware</span>
+<span class="n">rover</span> <span class="o">=</span> <span class="n">Rover</span><span class="p">()</span>
+<span class="n">lidar</span> <span class="o">=</span> <span class="n">Lidar</span><span class="p">(</span><span class="n">callback</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">convert</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">subscribe</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">cam</span> <span class="o">=</span> <span class="n">Camera</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Now, we will initialize the objects allowing us to control the hardware. We will initialize our lidar to have no callback function (notice we only declared callbacks for finishing the experiment and the camera), set convert to true, and subscribe to false. Setting convert to true will store all of our lidar data as <a class="reference external" href="https://pointclouds.org/documentation/tutorials/pcd_file_format.html">.pcd</a> files, which are more commonly used to store data than the rosbag we used in the <a class="reference internal" href="example0.html"><span class="std std-doc">previous tutorial</span></a>. Setting the subscribe parameter to false will ensure that the lidar is only saving data for a certain period of time.</p>
+<p>&nbsp;</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># declare number of images as a list so that the value can be passed back</span>
+<span class="c1"># after the anonymous function has been called</span>
+<span class="n">num_images</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Now, we will initialize the number of images variable. We will want to initialize this as an item in a list, as this will make sure that when we pass the item as a parameter in an anonymous function, the function can change the value.</p>
+<p>&nbsp;</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># initialize the experiment with a function that will be called when it</span>
+<span class="c1"># is over</span>
+<span class="c1"># we must instiantiate an initializer object before we make any calls to</span>
+<span class="c1"># other objects</span>
+<span class="n">init</span> <span class="o">=</span> <span class="n">ExperimentInitializer</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="n">finished_cb</span><span class="p">(</span><span class="n">lidar</span><span class="p">,</span> <span class="n">num_images</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>Next, we will initialize the experiment by creating an ExperimentInitializer object. This object will set the callback function that we previously declared as finished_cb, so that it will be called when the experiment is over, or when the rover has a critical error. Since the initializer will most likely take lidar, camera, or rover objects as a parameter, we will often want to create it after we create other objects. However, since we want the our callback function to run in case of any problems, we should create our initializer object before doing anything else.</p>
+<p>&nbsp;</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># set the callback - this means that everytime the rover&#39;s camera has a </span>
+<span class="c1"># new image, this function will be called</span>
+<span class="c1"># it is initialized as a lambda so values can be changed within the </span>
+<span class="c1"># function</span>
+<span class="n">cam</span><span class="o">.</span><span class="n">set_callback</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="n">take_video</span><span class="p">(</span><span class="n">cam</span><span class="p">,</span> <span class="n">num_images</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>Now, we will set the callback function for the camera, enabling it call this function whenever there is a new image from the camera. We will use an anonymous function to pass the callback function as it lets us pass parameters along with the function.</p>
+<p>&nbsp;</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># record the current time to a file</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;/experiment/information.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">outfile</span><span class="p">:</span>
+    <span class="n">outfile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;{get_time_str()}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>We will record the starting time for the experiment to the same file in which we’re storing data at the end of the experiment.</p>
+<p>&nbsp;</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># start a recording of the lidar data</span>
+<span class="n">lidar</span><span class="o">.</span><span class="n">subscribe_to_scan</span><span class="p">()</span>
+<span class="n">lidar</span><span class="o">.</span><span class="n">start_recording</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Now, we’re going to tell our lidar to start taking in laser scan data, and to start a recording of that data, actually saving the information. Since, we set <code class="docutils literal notranslate"><span class="pre">convert=True</span></code> when initializing the lidar, the laser scan data will be saved in .pcd files.</p>
+<p>&nbsp;</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># drive in a 1 meter square</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">):</span>
+    <span class="c1"># drive forward at a rate of 0.2 m/s for 5s</span>
+    <span class="n">rover</span><span class="o">.</span><span class="n">move_forward</span><span class="p">(</span><span class="mf">0.2</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+
+    <span class="c1"># turn right at a rate of 15 deg/s for 6s</span>
+    <span class="n">rover</span><span class="o">.</span><span class="n">turn_right</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span> 
+</pre></div>
+</div>
+<p>Next, we are actually going to move the rover in the same 1 meter by 1 meter square. Notice that for this script we are not telling the camera to capture images; it is doing that in the callback function we declared earlier.</p>
+ <p>&nbsp;</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># finish the experiment - this will automatically call our finished_cb func</span>
+<span class="n">finish_experiment</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Finally, we will let the system know that we are done. This will automatically call the finished_cb function that we declared at the top of the script.</p>
+<p>&nbsp;</p>
+</div>
+</div>
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="../index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">Utilizing More Features</a><ul>
+<li><a class="reference internal" href="#prerequisites">1. Prerequisites</a></li>
+<li><a class="reference internal" href="#the-code">2. The Code</a><ul>
+<li><a class="reference internal" href="#writing-the-code">2.1 Writing the Code</a></li>
+<li><a class="reference internal" href="#explanation">2.2 Explanation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="example0.html"
+                          title="previous chapter">Rover API First Script</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="../rover_api.html"
+                          title="next chapter">Rover API</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/examples/example1.md.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../rover_api.html" title="Rover API"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="example0.html" title="Rover API First Script"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Discover  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../rover_examples.html" >Rover Examples</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Utilizing More Features</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2023, the DiscoverCCRI team.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.0.2.
+    </div>
+  </body>
+</html>
