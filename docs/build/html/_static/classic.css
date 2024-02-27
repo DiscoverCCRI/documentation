@@ -42,9 +42,11 @@ div.bodywrapper {
 }
 
 div.body {
+    margin: auto;
     background-color: #ffffff;
     color: #000000;
     padding: 0 20px 30px 20px;
+    min-height: 100vh;
 }
 
 div.footer {
