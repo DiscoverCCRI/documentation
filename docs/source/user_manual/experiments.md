@@ -25,30 +25,27 @@ to which the experiment pertains. Click the **Add Experiment** button.
 ![Experiment List](images/add_experiment.png)
 
 Next, you will be presented with the experiment creation screen. Here, you will
-name your experiment, provide the experiment description, along with the experiment
-resource definition. 
+name your experiment, provide the experiment description, a GitHub link to your
+experiment source code, a cloud storage link to store the experiments results,
+dependencies your experiment will use, and resources your experiment will run on. 
 
-The description of your experiment can include any information you wish to include,
-but it *must* include a link to the templated GitHub repository containing your
-experiment's code. For more information about experiment templates, click [here](experiment_templates.md).
-
-The experiment resource definition states what devices and capabilities your experiment
-will use. For more information about resource definitions, click [here](resource_definitions.md)
+**NOTE:** The GitHub repository you provide for your experiment must conform to our repository templates.
+* Stationary template: [Here](https://github.com/DiscoverCCRI/DISCOVER-Experiment-Template)
+* Rover template: [Here](experiment_templates.md)
+* UAV template: [Here](experiment_templates.md)
 
 Click **Save Experiment** to create the experiment.  
 
-![Experiment Creation](images/experiment_creation.png)
+![Experiment Creation](images/create_experiment.png)
 
 ### Experiment Initiation
 
 As you develop your experiment, you can add anyone from within your project as
 additional experimenters using the **Update Experimenters** button, change the
-description using the **Change** button, and get a list of experiment resources
-using the **Manifest** button. Once you are ready for your experiment to be deployed
-click the **Initiate Development** button. This signals to a Discover operator
-that your experiment is ready to be deployed, and will automatically notify them.  
+description and name using the **Update** button, and update the cloud storage link using 
+the **Update** button.
 
-![Initiate Development](images/initiate_development.png)
+![Initiate Development](images/experiment_detail.png)
 
 ### Final Steps
 
